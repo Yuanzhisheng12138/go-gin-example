@@ -33,13 +33,13 @@ func ListOperationInfos(c *gin.Context) {
 	}
 	infos, err := infoService.GetAll()
 	if err != nil {
-		appG.Response(http.StatusInternalServerError, e.ERROR_GET_TAGS_FAIL, nil)
+		appG.Response(http.StatusInternalServerError, e.ERROR_GET_INFOS_FAIL, nil)
 		return
 	}
 
 	count, err := infoService.Count()
 	if err != nil {
-		appG.Response(http.StatusInternalServerError, e.ERROR_COUNT_TAG_FAIL, nil)
+		appG.Response(http.StatusInternalServerError, e.ERROR_COUNT_INFOS_FAIL, nil)
 		return
 	}
 
@@ -73,13 +73,13 @@ func ListSelectedOperationInfos(c *gin.Context) {
 	}
 	infos, err := infoService.GetSelectedAll()
 	if err != nil {
-		appG.Response(http.StatusInternalServerError, e.ERROR_GET_TAGS_FAIL, nil)
+		appG.Response(http.StatusInternalServerError, e.ERROR_GET_SELECTED_INFOS_FAIL, nil)
 		return
 	}
 
 	count, err := infoService.SelectedCount()
 	if err != nil {
-		appG.Response(http.StatusInternalServerError, e.ERROR_COUNT_TAG_FAIL, nil)
+		appG.Response(http.StatusInternalServerError, e.ERROR_COUNT_SELECTED_INFOS_FAIL, nil)
 		return
 	}
 
@@ -94,7 +94,7 @@ func ListValidSelectedOperationInfos(c *gin.Context) {
 	infoService := operation_service.SelectedInfo{}
 	infos, err := infoService.GetSelectedAllValid()
 	if err != nil {
-		appG.Response(http.StatusInternalServerError, e.ERROR_GET_TAGS_FAIL, nil)
+		appG.Response(http.StatusInternalServerError, e.ERROR_GET_VALID_SELECTED_INFOS_FAIL, nil)
 		return
 	}
 	appG.Response(http.StatusOK, e.SUCCESS, map[string]interface{}{
@@ -107,7 +107,7 @@ func AddSelectedOperationInfos(c *gin.Context) {
 	var selectedInfos []*operation_service.SelectedInfo
 
 	if err := c.ShouldBindJSON(&selectedInfos); err != nil {
-		appG.Response(http.StatusInternalServerError, e.ERROR_GET_TAGS_FAIL, nil)
+		appG.Response(http.StatusInternalServerError, e.ERROR_ADD_SELECTED_INFOS_FAIL, nil)
 		return
 	}
 
@@ -139,7 +139,7 @@ func EditSelectedOperationInfos(c *gin.Context) {
 	var selectedInfos []*operation_service.SelectedInfo
 
 	if err := c.ShouldBindJSON(&selectedInfos); err != nil {
-		appG.Response(http.StatusInternalServerError, e.ERROR_GET_TAGS_FAIL, nil)
+		appG.Response(http.StatusInternalServerError, e.ERROR_EDIT_SELECTED_INFOS_FAIL, err)
 		return
 	}
 
@@ -152,7 +152,7 @@ func EditSelectedOperationInfos(c *gin.Context) {
 		}
 
 		if err := selectedInfoService.EditSelectedInfo(); err != nil {
-			appG.Response(http.StatusInternalServerError, e.ERROR_ADD_ARTICLE_FAIL, nil)
+			appG.Response(http.StatusInternalServerError, e.ERROR_EDIT_SELECTED_INFOS_FAIL, err)
 			return
 		}
 	}
@@ -167,7 +167,7 @@ func DeleteSelectedOperationInfos(c *gin.Context) {
 	for _, id := range idArr {
 		selectedInfoService := operation_service.SelectedInfo{ID: id}
 		if err := selectedInfoService.DeleteSelectedInfo(); err != nil {
-			appG.Response(http.StatusInternalServerError, e.ERROR_ADD_ARTICLE_FAIL, nil)
+			appG.Response(http.StatusInternalServerError, e.ERROR_DELETE_SELECTED_INFOS_FAIL, err)
 			return
 		}
 	}

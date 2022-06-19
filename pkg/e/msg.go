@@ -30,6 +30,16 @@ var MsgFlags = map[int]string{
 	ERROR_UPLOAD_SAVE_IMAGE_FAIL:    "保存图片失败",
 	ERROR_UPLOAD_CHECK_IMAGE_FAIL:   "检查图片失败",
 	ERROR_UPLOAD_CHECK_IMAGE_FORMAT: "校验图片错误，图片格式或大小有问题",
+
+	ERROR_GET_INFOS_FAIL:   "获取信息列表失败",
+	ERROR_COUNT_INFOS_FAIL: "统计信息失败",
+
+	ERROR_GET_SELECTED_INFOS_FAIL:       "获取被选中信息列表失败",
+	ERROR_COUNT_SELECTED_INFOS_FAIL:     "统计被选中信息列表失败",
+	ERROR_GET_VALID_SELECTED_INFOS_FAIL: "获取在有效期内信息列表失败",
+	ERROR_ADD_SELECTED_INFOS_FAIL:       "新增被选中信息失败",
+	ERROR_EDIT_SELECTED_INFOS_FAIL:      "修改被选中信息失败",
+	ERROR_DELETE_SELECTED_INFOS_FAIL:    "删除被选中信息失败",
 }
 
 // GetMsg get error information based on Code
