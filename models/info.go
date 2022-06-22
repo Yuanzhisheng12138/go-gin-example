@@ -164,14 +164,18 @@ func GetSelectedInfos(pageNum int, pageSize int, isValid int, maps map[string]st
 			err = db.Table("selected_operation_info").
 				Where("program_name like ? AND programset_name like ? AND program_id like ? AND programset_id like ? AND cache_validity_time < ?",
 					maps["program_name"], maps["programset_name"], maps["program_id"], maps["programset_id"], datetime).
+				Order("cache_validity_time desc").
 				Offset(pageNum).Limit(pageSize).Find(&infos).Error
 		} else if isValid == 1 {
 			err = db.Table("selected_operation_info").
-				Where("program_name like ? AND programset_name like ? AND program_id like ? AND programset_id like ? AND cache_validity_time > ?", maps["program_name"], maps["programset_name"], maps["program_id"], maps["programset_id"], datetime).Offset(pageNum).Limit(pageSize).Find(&infos).Error
+				Where("program_name like ? AND programset_name like ? AND program_id like ? AND programset_id like ? AND cache_validity_time > ?", maps["program_name"], maps["programset_name"], maps["program_id"], maps["programset_id"], datetime).
+				Order("cache_validity_time desc").
+				Offset(pageNum).Limit(pageSize).Find(&infos).Error
 		} else {
 			err = db.Table("selected_operation_info").
 				Where("program_name like ? AND programset_name like ? AND program_id like ? AND programset_id like ? ",
 					maps["program_name"], maps["programset_name"], maps["program_id"], maps["programset_id"]).
+				Order("cache_validity_time desc").
 				Offset(pageNum).Limit(pageSize).Find(&infos).Error
 		}
 	} else {
